@@ -18,10 +18,20 @@ scrape_configs:
     static_configs:
       - targets: ['nodeexporter:9100']
 
+  - job_name: 'nodeexporter2'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [ '192.168.101.11:9100' ] # New exporter's IP.
+
   - job_name: 'cadvisor'
     scrape_interval: 5s
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ['cadvisor:8080'] 
+
+  - job_name: 'cadvisor2'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.101.11:8080'] # New exporter's IP.
 
   - job_name: 'prometheus'
     scrape_interval: 10s
