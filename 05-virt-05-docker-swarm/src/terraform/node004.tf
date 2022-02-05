@@ -1,7 +1,7 @@
-resource "yandex_compute_instance" "node04" {
-  name                      = "node04"
+resource "yandex_compute_instance" "node004" {
+  name                      = "node004"
   zone                      = "ru-central1-a"
-  hostname                  = "node04.netology.yc"
+  hostname                  = "node004.netology.yc"
   allow_stopping_for_update = true
 
   resources {
@@ -12,14 +12,14 @@ resource "yandex_compute_instance" "node04" {
   boot_disk {
     initialize_params {
       image_id    = "${var.centos-7-base}"
-      name        = "root-node04"
+      name        = "root-node004"
       type        = "network-nvme"
-      size        = "40"
+      size        = "15"
     }
   }
 
   network_interface {
-    subnet_id  = "${yandex_vpc_subnet.default.id}"
+    subnet_id  = "e9b621schggu7eeaqjrc"
     nat        = true
     ip_address = "192.168.101.14"
   }

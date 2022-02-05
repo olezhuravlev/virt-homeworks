@@ -1,7 +1,7 @@
-resource "yandex_compute_instance" "node05" {
-  name                      = "node05"
+resource "yandex_compute_instance" "node001" {
+  name                      = "node001"
   zone                      = "ru-central1-a"
-  hostname                  = "node05.netology.yc"
+  hostname                  = "node001.netology.yc"
   allow_stopping_for_update = true
 
   resources {
@@ -12,16 +12,16 @@ resource "yandex_compute_instance" "node05" {
   boot_disk {
     initialize_params {
       image_id    = "${var.centos-7-base}"
-      name        = "root-node05"
+      name        = "root-node001"
       type        = "network-nvme"
-      size        = "40"
+      size        = "15"
     }
   }
 
   network_interface {
-    subnet_id  = "${yandex_vpc_subnet.default.id}"
+    subnet_id  = "e9b621schggu7eeaqjrc"
     nat        = true
-    ip_address = "192.168.101.15"
+    ip_address = "192.168.101.11"
   }
 
   metadata = {

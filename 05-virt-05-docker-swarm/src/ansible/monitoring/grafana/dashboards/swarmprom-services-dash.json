@@ -1568,12 +1568,12 @@
         "sort": 0,
         "tagValuesQuery": "label_values({node_id=\"$tag\"},node_name)",
         "tags": [
-          "node01.netology.yc",
-          "node05.netology.yc",
-          "node04.netology.yc",
-          "node03.netology.yc",
-          "node06.netology.yc",
-          "node02.netology.yc"
+          "node001.netology.yc",
+          "node005.netology.yc",
+          "node004.netology.yc",
+          "node003.netology.yc",
+          "node006.netology.yc",
+          "node002.netology.yc"
         ],
         "tagsQuery": "label_values(node_meta, node_name)",
         "type": "query",
