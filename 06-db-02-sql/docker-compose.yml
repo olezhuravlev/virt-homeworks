@@ -1,0 +1,37 @@
+version: "3.9"
+  
+services: 
+  data:
+    container_name: "pg12"
+    image: "postgres:12"
+    volumes:
+      - ./db_vol:/db_vol
+      - ./backup_vol:/backup_vol
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    networks:
+      pg_adm:
+        ipv4_address: ${DB_IPV4}
+  pgadmin:
+    container_name: "pg12_adm"
+    image: "dpage/pgadmin4"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${DB_USER_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    networks:
+      pg_adm:
+        ipv4_address:  ${PGADM_IPV4}
+
+networks:
+  pg_adm:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${PGADM_SUBNET}
+          gateway: ${PGADM_GATEWAY}
