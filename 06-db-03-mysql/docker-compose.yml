@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  mysql80:
+    container_name: "mysql80"
+    image: "mysql:8.0.28-debian"
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./test_data:/test_data
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      test_net:
+        ipv4_address: ${DB_IPV4}
+networks:
+  test_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${PGADM_SUBNET}
+          gateway: ${PGADM_GATEWAY}
