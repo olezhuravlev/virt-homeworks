@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  data:
+    container_name: "pg13"
+    image: "postgres:13"
+    volumes:
+      - ./test_data:/test_data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+#      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    networks:
+      pg_adm:
+        ipv4_address: ${DB_IPV4}
+  pgadmin:
+    container_name: "pga4_6"
+    image: "dpage/pgadmin4:6"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${DB_USER_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    networks:
+      pg_adm:
+        ipv4_address:  ${PGADM_IPV4}
+
+networks:
+  pg_adm:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${PGADM_SUBNET}
+          gateway: ${PGADM_GATEWAY}
