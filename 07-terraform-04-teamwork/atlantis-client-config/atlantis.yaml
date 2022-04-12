@@ -1,0 +1,26 @@
+version: 3
+automerge: true
+parallel_plan: true
+parallel_apply: true
+projects:
+  - dir: .
+    workspace: stage
+    autoplan:
+      when_modified: [ "*.tf" ]
+      enabled: true
+    workflow: default
+  - dir: .
+    workspace: prod
+    autoplan:
+      when_modified: [ "*.tf" ]
+      enabled: true
+    workflow: default
+workflows:
+  default:
+    plan:
+      steps:
+        - run: echo "*** CLIENT - BEFORE INIT ***"
+        - init
+        - plan:
+            extra_args: [ "-lock=false" ]
+        - run: echo "*** CLIENT - AFTER INIT ***"

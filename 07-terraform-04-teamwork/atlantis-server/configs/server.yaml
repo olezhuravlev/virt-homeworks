@@ -1,0 +1,22 @@
+repos:
+  - id: github.com/olezhuravlev/terraform-cloud-test
+    branch: /.*/
+    apply_requirements: [ approved, mergeable ]
+    workflow: default
+    allowed_overrides: [ workflow ]
+    allow_custom_workflows: true
+    delete_source_branch_on_merge: true
+workflows:
+  default:
+    plan:
+      steps:
+        - run: echo "*** SERVER - BEFORE INIT ***"
+        - init
+        - plan:
+            extra_args: [ "-lock=false" ]
+        - run: echo "*** SERVER - AFTER INIT ***"
+    apply:
+      steps:
+        - run: echo "*** SERVER - BEFORE APPLY ***"
+        - apply
+        - run: echo "*** SERVER - AFTER APPLY ***"

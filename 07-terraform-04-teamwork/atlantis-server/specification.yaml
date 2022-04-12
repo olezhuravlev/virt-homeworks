@@ -1,0 +1,28 @@
+spec:
+  containers:
+    - command:
+      args:
+        - atlantis
+        - server
+        - "--gh-user=olezhuravlev"
+        - "--gh-token=ghp_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXtW9"
+        - "--gh-webhook-secret=hdcXXXXXXXXXXXXXXXXXXXXXXXXXXqak"
+        - "--repo-allowlist=github.com/olezhuravlev/terraform-cloud-test"
+        - "--repo-config=/home/atlantis-server-config/server.yaml"
+      env:
+        - name: YC_TOKEN
+          value: AQAAAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX222c
+      image: ghcr.io/runatlantis/atlantis:v0.19.2
+      name: atlantis-server
+      securityContext:
+        privileged: false
+      stdin: true
+      tty: true
+      volumeMounts:
+        - mountPath: /home/atlantis-server-config
+          name: atlantis-volume
+  restartPolicy: Always
+  volumes:
+    - name: atlantis-volume
+      hostPath:
+        path: /home/ubuntu/atlantis-server-config
